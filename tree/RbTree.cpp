@@ -178,7 +178,6 @@ void RbTree::fixInsertRBTree(Node *&node) {
     } else {
         //case 4: 삼촌은 Black 일때
         //부모를 검은색으로 칠하고 끝내면 black height가 일치하지 않으므로(검은색 leaf만 있으므로) 삼촌에 붙이기
-        // (같은 방향으로 맞추기)
         caseUncleIsBlack1(node);
     }
 
@@ -226,10 +225,27 @@ void RbTree::caseUncleIsBlack2(Node *&node) {
     } else {
         rotateLeft(grandParent);
     }
-    // grandparent와 parent가 바꼈으므로 parent를 검은색으로
+    // grandparent와 parent가 바뀌었으므로 parent를 검은색으로
     // grandparent를 빨간색으로 바꿔주기
     setColor(parent, BLACK);
     setColor(grandParent, RED);
 
 }
 
+void RbTree::deleteValue(int data) {
+
+    Node *node = deleteBST(root, data);
+    fixDeleteRBTree(node);
+}
+
+Node* RbTree::deleteBST(Node *&node, int data) {
+
+    if (node == nullptr) {
+        return node;
+    }
+
+
+//    return (node -> data > data) ? deleteBST(node->left, data) : deleteBST(node->right, data);
+
+
+}
