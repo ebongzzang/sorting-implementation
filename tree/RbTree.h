@@ -15,7 +15,7 @@ struct Node {
     Node *left, *right, *parent;
 
     explicit Node(int);
-
+    explicit Node(void);
 };
 
 
@@ -24,6 +24,7 @@ class RbTree {
 
 private:
     Node *root;
+    Node *nil;
 
 protected:
     void rotateLeft(Node *&);
@@ -54,20 +55,32 @@ protected:
 
     bool isNotRootAndDoubleRed(Node *&);
 
-    void caseUncleIsRed(Node *&);
+    void insertCaseUncleRed(Node *&);
 
-    void caseUncleIsBlack1(Node *&);
+    void insertCaseUncleBlack1(Node *&);
 
-    void caseUncleIsBlack2(Node *&);
+    void insertCaseUncleBlack2(Node *&);
+
+    void deleteCaseOnlyBrotherRed(Node *&);
+
+    void deleteCaseAllBlack(Node *&);
+
+    void deleteCaseOnlyParentRed(Node *&);
+
+    void deleteCaseOnlyCurrentRed(Node *&);
+
+    void deleteCaseAllBlackButChildRed(Node *&);
+
+    void deleteCaseRoot(Node *&);
 
 
-    Node *parent(Node *&);
+    Node *getParent(Node *&);
 
-    Node * grandparent(Node *&);
+    Node *getGrandparent(Node *&);
 
-    Node *sibling(Node *&);
+    Node *getSibling(Node *&);
 
-    Node *uncle(Node *&);
+    Node *getUncle(Node *&);
 
 
 public:
