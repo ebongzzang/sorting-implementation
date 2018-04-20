@@ -8,6 +8,13 @@
 
 class Quicksort {
 
+private:
+    int randomPivot(int start, int end);
+    int partition(int arr[], int start, int end);
+public:
+    void quickSort(int arr[], int start, int end);
+
+    void swap(int *a, int *b);
 };
 
 
