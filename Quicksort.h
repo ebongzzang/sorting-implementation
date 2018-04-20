@@ -13,7 +13,7 @@ private:
     int partition(int arr[], int start, int end);
 public:
     void quickSort(int arr[], int start, int end);
-
+    void printArray(int arr[], int size);
     void swap(int *a, int *b);
 };
 

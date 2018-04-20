@@ -4,6 +4,7 @@
 
 #include "Quicksort.h"
 #include <cstdlib>
+#include <iostream>
 
 int Quicksort::randomPivot(int start, int end) {
     srand(time(NULL));
@@ -22,7 +23,7 @@ int Quicksort::partition(int *arr, int low, int high) {
 
         if (arr[j] <= pivot) //작은 값을 발견하면
         {
-            i++;    // 작은 값들의 공간 인덱스 + 1
+            i++;    // 작은 값 경계 + 1
             swap(&arr[i], &arr[j]); // 그 공간에 넣기
         }
         else {
@@ -49,8 +50,14 @@ void Quicksort::quickSort(int *arr, int low, int high) {
 
 }
 
-void Quicksort::swap(int* a, int* b)
-{
+void Quicksort:: printArray(int arr[], int size) {
+    for (int i = 0; i < size; i++)
+        std::cout << arr[i] << std::endl;
+    std::cout << "n" << std::endl;
+}
+
+
+void Quicksort::swap(int *a, int *b) {
     int t = *a;
     *a = *b;
     *b = t;

@@ -1,17 +1,18 @@
 #include <iostream>
 #include "tree/RbTree.h"
+#include "Quicksort.h"
 
 using namespace std;
 
 int main(void) {
-    int data[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int data[10] = {10,4,2,1,7,3,5,2,1,1};
     RbTree rbTree1;
 
-    for (int i = 0; i < (sizeof(data) / sizeof(int)); i++) {
-        rbTree1.insertValue(data[i]);
-    }
+    Quicksort * quicksort = new Quicksort();
 
-    rbTree1.inorder();
+    quicksort->quickSort(data,0, sizeof(data)/sizeof(data[0]) -1);
+
+    quicksort->printArray(data, 10);
 
 
     return 0;
