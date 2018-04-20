@@ -3,18 +3,32 @@
 
 using namespace std;
 
-int main(void) {
-    int data[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    RbTree rbTree1;
+void printArray(int arr[], int size) {
+    for (int i = 0; i < size; i++)
+        std::cout << arr[i] << std::endl;
+    std::cout << "n" << std::endl;
+}
 
-    for (int i = 0; i < (sizeof(data) / sizeof(int)); i++) {
-        rbTree1.insertValue(data[i]);
+void insertionSort(int *arr) {
+
+
+    for (int i = 1; i <= 9; i++) {
+        int temp = arr[i];
+        int aux = i - 1;
+
+        while (aux >= 0 && arr[aux] > temp) {
+            arr[aux + 1] = arr[aux];
+            aux--;
+        }
+        arr[aux +1] = temp;
     }
 
-    rbTree1.inorder();
+    printArray(arr, 10);
+}
 
-
-    return 0;
-
+int main(void) {
+    int data[10] = {1, 2, 3, 4, 5, 7, 6, 8, 10, 9};
+    insertionSort(data);
 
 }
+
