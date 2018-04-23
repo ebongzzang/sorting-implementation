@@ -19,6 +19,8 @@ int main(void) {
 
     rbTree1.inorder();
 
+    rbTree1.printTree();
+
     return 0;
 
 

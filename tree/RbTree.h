@@ -15,7 +15,6 @@ struct Node {
     Node *left, *right, *parent;
 
     explicit Node(int);
-    explicit Node(void);
 };
 
 
@@ -53,26 +52,6 @@ protected:
 
     int getBlackHeight(Node *);
 
-    bool isNotRootAndDoubleRed(Node *&);
-
-    void insertCaseUncleRed(Node *&);
-
-    void insertCaseUncleBlack1(Node *&);
-
-    void insertCaseUncleBlack2(Node *&);
-
-    void deleteCaseOnlyBrotherRed(Node *&);
-
-    void deleteCaseAllBlack(Node *&);
-
-    void deleteCaseOnlyParentRed(Node *&);
-
-    void deleteCaseOnlyCurrentRed(Node *&);
-
-    void deleteCaseAllBlackButChildRed(Node *&);
-
-    void deleteCaseRoot(Node *&);
-
 
     Node *getParent(Node *&);
 
@@ -84,6 +63,10 @@ protected:
 
     void swap(int *a, int *b);
 
+    void postOrder(Node *&, int indent);
+
+
+
 public:
     RbTree();
 
@@ -91,11 +74,9 @@ public:
 
     void deleteValue(int);
 
-    void merge(RbTree);
-
     void inorder();
 
-    void preorder();
+    void printTree();
 };
 
 
