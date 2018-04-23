@@ -4,7 +4,7 @@
 using namespace std;
 
 int main(void) {
-    int data[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int data[10] = {1, 2, 5, 4, 3, 6, 9, 8, 7, 10};
     RbTree rbTree1;
 
     for (int i = 0; i < (sizeof(data) / sizeof(int)); i++) {
@@ -13,6 +13,13 @@ int main(void) {
 
     rbTree1.inorder();
 
+    std::cout << "\n\n\n" << std::endl;
+
+    rbTree1.deleteValue(7);
+
+    rbTree1.inorder();
+
+    rbTree1.printTree();
 
     return 0;
 
