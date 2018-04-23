@@ -32,6 +32,12 @@ int RbTree::getColor(Node *&node) {
     return node->color;
 }
 
+void RbTree::swap(int *a, int *b) {
+    int t = *a;
+    *a = *b;
+    *b = t;
+}
+
 void RbTree::setColor(Node *&node, int color) {
 
     //루트 노드일 경우 무조건 검은색이여야 하므로 거부
@@ -200,83 +206,64 @@ Node *RbTree::insertBST(Node *&root, Node *&newNode) {
 }
 
 void RbTree::fixInsertRBTree(Node *&node) {
-    Node *parent = getParent(node);
-    Node *uncle = getUncle(node);
-    if (getParent(node) == nullptr) {
-        //case 1: 루트에 삽입할때
-        node->color = BLACK;
-    } else if (getParent(node)->color == BLACK) {
-        //case 2: 더블레드가 아닐때
-        return;
-    } else if (getColor(uncle) == RED) {
-        //case 3: 삼촌, 부모도 RED 일때
-        insertCaseUncleRed(node);
-    } else {
-        //case 4: 삼촌은 Black 일때
-        //부모를 검은색으로 칠하고 끝내면 black height가 일치하지 않으므로(검은색 leaf만 있으므로) 삼촌에 붙이기
-        insertCaseUncleBlack1(node);
+    Node *parent = nullptr;
+    Node *grandparent = nullptr;
+    // double red가 아닐때까지 반복
+    while (node != root && getColor(node) == RED && getColor(node->parent) == RED) {
+        parent = node->parent;
+        grandparent = parent->parent;
+
+        // case2: P가 루트일 때는 검은색으로만 바꿔주면 되므로 패스
+
+        if (grandparent == nullptr) {
+            break;
+        }
+
+        Node *uncle = getUncle(node);
+        // case 3: 삼촌, 부모도 RED 일때
+        if (getColor(uncle) == RED) {
+            setColor(uncle, BLACK);
+            setColor(parent, BLACK);
+            setColor(grandparent, RED);
+            //grandparent가 root일 경우도 있기 때문에 재검사 필요
+            node = grandparent;
+        } else {
+
+            if (parent == grandparent->left) {
+                // left - right 일 경우 left - left로 변환
+                if (node == parent->right) {
+                    rotateLeft(parent);
+                    node = parent;
+                    parent = node->parent;
+                    // 회전 후 부모 포인터 변경
+                }
+                // left - left
+                rotateRight(grandparent);
+                //위치 변경 뒤 색상 변경
+                std::swap(parent->color, grandparent->color);
+                // 부모노드부터 재검사
+                node = parent;
+
+            } else if(parent == grandparent -> right) {
+
+                // right - left 일 경우 right - right로 변환
+                if(node == parent -> left) {
+                    rotateRight(parent);
+                    node = parent;
+                    parent = node -> parent;
+
+                }
+                // right - right
+                rotateLeft(grandparent);
+                //위치 변경 뒤 색상 변경
+                std::swap(parent->color, grandparent->color);
+                // 부모노드부터 재검사
+                node = parent;
+            }
+        }
+        setColor(root, BLACK);
     }
 
-}
-
-void RbTree::insertCaseUncleRed(Node *&node) {
-
-    Node *grandParent = getGrandparent(node);
-    Node *uncle = getUncle(node);
-    Node *parent = getParent(node);
-
-    setColor(parent, BLACK);
-    setColor(uncle, BLACK);
-    setColor(grandParent, RED);
-
-    fixInsertRBTree(grandParent);
-    //조상 노드가 루트일수도 있기 때문에 다시 순회
-}
-
-void RbTree::insertCaseUncleBlack1(Node *&node) {
-    Node *grandParent = getGrandparent(node);
-    Node *parent = getParent(node);
-
-    if (node == grandParent->right->right) {
-        rotateLeft(grandParent);
-        node = parent->left;
-        setColor(parent, BLACK);
-        setColor(node, RED);
-        return;
-    } else if (node == grandParent->left->left) {
-        rotateRight(grandParent);
-        node = parent->right;
-        setColor(parent, BLACK);
-        setColor(node, RED);
-        return;
-    } else if (node == grandParent->left->right) {
-        rotateLeft(parent);
-        node = node->left;
-        // 좌회전 뒤 회전축 노드를 바꿈
-    } else if (node == grandParent->right->left) {
-        rotateRight(parent);
-        node = node->right;
-
-    }
-    // 삼촌 노드로 옮겨주는 작업 (black height 교정)
-    insertCaseUncleBlack2(node);
-
-}
-
-
-void RbTree::insertCaseUncleBlack2(Node *&node) {
-    Node *grandParent = getGrandparent(node);
-    Node *parent = getParent(node);
-
-    if (node == parent->left) {
-        rotateRight(grandParent);
-    } else {
-        rotateLeft(grandParent);
-    }
-    // grandparent와 parent가 바뀌었으므로 parent를 검은색으로
-    // grandparent를 빨간색으로 바꿔주기
-    setColor(parent, BLACK);
-    setColor(grandParent, RED);
 
 }
 
@@ -296,7 +283,7 @@ Node *RbTree::deleteBST(Node *&node, int data) {
         return deleteBST(node->left, data);
     }
 
-    if (data > root->data) {
+    if (data > node->data) {
         return deleteBST(node->right, data);
 
     }
@@ -322,7 +309,7 @@ void RbTree::fixDeleteRBTree(Node *&node) {
 
 
     deleteCaseRoot(node);
-
+    delete(node);
 }
 
 void RbTree::deleteCaseRoot(Node *&node) {
@@ -336,7 +323,7 @@ void RbTree::deleteCaseOnlyBrotherRed(Node *&node) {
     Node *brother = getSibling(node);
     Node *parent = getParent(node);
 
-    if (brother->color == RED) {
+    if (getColor(brother) == RED) {
         setColor(parent, RED);
         setColor(brother, BLACK);
 
@@ -357,10 +344,10 @@ void RbTree::deleteCaseAllBlack(Node *&node) {
     Node *brother = getSibling(node);
     Node *parent = getParent(node);
 
-    if ((parent->color == BLACK) &&
-        (brother->color == BLACK) &&
-        (brother->left->color == BLACK) &&
-        (brother->right->color == BLACK)) {
+    if ((getColor(parent) == BLACK) &&
+        (getColor(brother)== BLACK) &&
+        (getColor(brother) == BLACK) &&
+        (getColor(brother) == BLACK)) {
 
         setColor(brother, RED);
         deleteCaseRoot(parent);

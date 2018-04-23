@@ -82,6 +82,7 @@ protected:
 
     Node *getUncle(Node *&);
 
+    void swap(int *a, int *b);
 
 public:
     RbTree();
