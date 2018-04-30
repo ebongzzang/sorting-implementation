@@ -33,11 +33,6 @@ int RbTree::getColor(Node *&node) {
     return node->color;
 }
 
-void RbTree::swap(int *a, int *b) {
-    int t = *a;
-    *a = *b;
-    *b = t;
-}
 
 void RbTree::setColor(Node *&node, int color) {
 
@@ -109,6 +104,18 @@ Node *RbTree::minValueNode(Node *&node) {
     return ptr;
 }
 
+Node *RbTree::maxValueNode(Node *&node) {
+
+    Node *ptr = node;
+    if (ptr == nullptr)
+        return ptr;
+
+    while (ptr->right != nullptr)
+        ptr = ptr->right;
+
+    return ptr;
+}
+
 int RbTree::getBlackHeight(Node *node) {
     int blackheight = 0;
     while (node != nullptr) {
@@ -120,7 +127,7 @@ int RbTree::getBlackHeight(Node *node) {
 }
 
 
-/* node = 현재, rightChild = 피봇(회전 기준) */
+/* node = 회전축, rightChild = 회전될 노드(피봇) */
 
 void RbTree::rotateLeft(Node *&node) {
 
@@ -211,13 +218,14 @@ Node *RbTree::insertBST(Node *&root, Node *&newNode) {
 void RbTree::fixInsertRBTree(Node *&node) {
     Node *parent = nullptr;
     Node *grandparent = nullptr;
+
     // double red가 아닐때까지 반복
     while (node != root && getColor(node) == RED && getColor(node->parent) == RED) {
+
         parent = node->parent;
         grandparent = parent->parent;
 
-        // case2: P가 루트일 때는 검은색으로만 바꿔주면 되므로 패스
-
+        // P가 루트일 때는 검은색으로만 바꿔주면 되므로 패스
         if (grandparent == nullptr) {
             break;
         }
@@ -305,9 +313,10 @@ Node *RbTree::deleteBST(Node *&node, int data) {
 }
 
 void RbTree::fixDeleteRBTree(Node *&node) {
-
+    // 교정할 노드가 없을 경우 종료
     if (node == nullptr)
         return;
+    //삭제할 노드가 루트일경우 종료
 
     if (node == root) {
         root = nullptr;
@@ -315,7 +324,7 @@ void RbTree::fixDeleteRBTree(Node *&node) {
     }
 
     if (getColor(node) == RED || getColor(node->left) == RED || getColor(node->right) == RED) {
-        //Case 1: 자기 자신이 빨간색일 경우 색깔만 변경
+        //Case 1: 자기 자신이 빨간색이거나 자식이 빨간색이면 색깔만 변경
         Node *child = node->left != nullptr ? node->left : node->right;
 
         if (node == node->parent->left) {
@@ -340,7 +349,7 @@ void RbTree::fixDeleteRBTree(Node *&node) {
         Node *ptr = node;
         // 자기 자신이 BLACK이고 루트가 아니면 더블블랙임
         setColor(ptr, DOUBLE_BLACK);
-        // Case 2: Double Black일 경우
+        // Double Black일 경우
         while (ptr != root && getColor(ptr) == DOUBLE_BLACK) {
             parent = ptr->parent;
 
