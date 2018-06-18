@@ -17,10 +17,12 @@ void insertionSort(int *arr) {
         int aux = i - 1;
 
         while (aux >= 0 && arr[aux] > temp) {
+            // 앞에 값들이 지금 값보다 클때까지 반복, 한칸씩 밀기
+            // 즉, temp보다 작은 값의 위치가 나오면 정지
             arr[aux + 1] = arr[aux];
             aux--;
         }
-        arr[aux +1] = temp;
+        arr[aux +1] = temp; // 현재 값이 앞에값들보다 작으면 그 위치에서 멈추므로 temp 값을 +1 위치에 대입
     }
 
     printArray(arr, 10);
