@@ -10,7 +10,7 @@ void printArray(int arr[], int size) {
 }
 
 void insertionSort(int *arr) {
-
+    // 앞쪽부터 정렬됨
 
     for (int i = 1; i <= 9; i++) {
         int temp = arr[i];
