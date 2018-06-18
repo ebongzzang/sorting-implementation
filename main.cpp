@@ -28,9 +28,32 @@ void insertionSort(int *arr) {
     printArray(arr, 10);
 }
 
+void selectionSort(int * arr) {
+    int indexMin, temp;
+
+    // 앞의 값들이 모두 정렬되면 뒤의 값도 정렬됐으므로 -1
+
+    for (int i=0; i< 9; i++) {
+        indexMin = i;
+        for (int j= i+ 1; j< 10; j++) {
+            // 앞의 값은 정렬됐으므로 제외, +1
+            if(arr[j] < arr[indexMin]) {
+                // 최소값을 찾음
+                indexMin = j;
+            }
+        }
+
+        // 최소값과 현재 위치 변경
+        temp = arr[indexMin];
+        arr[indexMin] = arr[i];
+        arr[i] = temp;
+    }
+    printArray(arr, 10);
+}
+
 int main(void) {
     int data[10] = {1, 2, 3, 4, 5, 7, 6, 8, 10, 9};
     insertionSort(data);
-
+    selectionSort(data);
 }
 
