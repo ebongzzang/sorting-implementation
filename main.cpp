@@ -1,12 +1,14 @@
 #include <iostream>
 #include "tree/RbTree.h"
 #include "tree/Heap.h"
+#include "Quicksort.h"
 
 using namespace std;
 
 void rbTree(int * data) {
     RbTree rbTree1;
 
+    auto quicksort = new Quicksort();
 
     quicksort->quickSort(data,0, sizeof(data)/sizeof(data[0]) -1);
 

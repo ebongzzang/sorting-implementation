@@ -14,6 +14,9 @@ public:
     static void insertionSort(int *arr);
 
     static void selectionSort(int *arr);
+
+    static void buubleSort(int * arr);
+
 };
 
 
