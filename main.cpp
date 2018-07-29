@@ -7,9 +7,6 @@ using namespace std;
 void rbTree(int * data) {
     RbTree rbTree1;
 
-    for (int i = 0; i < (sizeof(data) / sizeof(int)); i++) {
-        rbTree1.insertValue(data[i]);
-    }
 
     rbTree1.inorder();
 
