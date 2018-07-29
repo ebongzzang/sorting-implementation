@@ -10,9 +10,11 @@ class MergeSort {
 
 
 public:
-    void mergeSort(int* arr, int l, int r);
-    void merge(int* arr, int l, int m, int r);
-    void printArray(int A[], int size);
+    static void mergeSort(int *arr, int l, int r);
+
+    static void merge(int *arr, int l, int m, int r);
+
+    static void printArray(int A[], int size);
 
 };
 
