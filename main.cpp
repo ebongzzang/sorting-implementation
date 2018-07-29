@@ -8,7 +8,7 @@ void rbTree(int * data) {
     RbTree rbTree1;
 
 
-    rbTree1.inorder();
+    quicksort->quickSort(data,0, sizeof(data)/sizeof(data[0]) -1);
 
     std::cout << "\n\n\n" << std::endl;
 
