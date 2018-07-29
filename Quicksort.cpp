@@ -6,38 +6,30 @@
 #include <cstdlib>
 #include <iostream>
 
-int Quicksort::randomPivot(int start, int end) {
-    srand(time(NULL));
-    return start + rand() % (end - start);
-
-}
-
 //Lomuto partition
 
 int Quicksort::partition(int *arr, int low, int high) {
-    int pivot = arr[high];// pivot
-    int i = (low - 1);  // 작은 값 경계, 지금은 작은값을 발견 못했으므로 -1
+    printArray(arr, 10);
 
-    for (int j = low; j <= high- 1; j++)
-    {
+    int pivot =arr[ high];
+    int left = low-1;
 
-        if (arr[j] <= pivot) //작은 값을 발견하면
-        {
-            i++;    // 작은 값 경계 + 1
-            swap(&arr[i], &arr[j]); // 그 공간에 넣기
-        }
-        else {
-            // 큰 값들의 경우 스왑할 필요 없음 (마지막에 피봇이 스왑되니까)
+    // 피봇 마지막 값 까지 회전
+    for(int j = low; j <= high -1; j++) {
+        // j가 만약 pivot보다 작다면 i를 한칸 늘리고 교환
+        if(arr[j] <= pivot) {
+            left++;
+            swap(&arr[left], &arr[j]);
         }
     }
-    swap(&arr[i + 1], &arr[high]); // 교환
-    return (i + 1);
+    // 루프가 끝난 뒤 i+1는 피봇보다 큰값중 하나이므로 교환
+    swap(&arr[left +1], &arr[high]);
+    return left+1;
 }
 
 void Quicksort::quickSort(int *arr, int low, int high) {
 
     if (low < high) {
-
         int pivot = partition(arr, low, high); // 정렬 완료됨
 
         quickSort(arr, low, pivot-1);
@@ -47,13 +39,12 @@ void Quicksort::quickSort(int *arr, int low, int high) {
 
     }
 
-
 }
 
-void Quicksort:: printArray(int arr[], int size) {
+void Quicksort::printArray(int arr[], int size) {
     for (int i = 0; i < size; i++)
-        std::cout << arr[i] << std::endl;
-    std::cout << "n" << std::endl;
+        std::cout << arr[i] << "\t";
+    std::cout << "\n" << std::endl;
 }
 
 
