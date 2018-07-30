@@ -49,3 +49,8 @@ fabric.properties
 
 # Editor-based Rest Client
 .idea/httpRequests
+\.idea/markdown-exported-files\.xml
+
+\.idea/markdown-navigator\.xml
+
+\.idea/markdown-navigator/profiles_settings\.xml
