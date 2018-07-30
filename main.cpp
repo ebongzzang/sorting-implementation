@@ -1,9 +1,12 @@
 #include <iostream>
 #include "tree/RbTree.h"
 #include "tree/Heap.h"
-#include "Quicksort.h"
+#include "sorting/Quicksort.h"
+#include "graph/Graph.h"
+#include "graph/GraphSearch.h"
 
 using namespace std;
+
 
 void rbTree(int * data) {
     RbTree rbTree1;
