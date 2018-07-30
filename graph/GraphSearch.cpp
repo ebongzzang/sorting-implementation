@@ -7,6 +7,11 @@
 #include <algorithm>
 
 
+/**
+ * Tree에서의 level-order 탐색과 비슷하다.
+ * @param graph
+ * @param start
+ */
 void GraphSearch::bfs(Graph *graph, int start) {
 
     int V = graph->V;
@@ -24,8 +29,7 @@ void GraphSearch::bfs(Graph *graph, int start) {
     visited[start] = true;
     queue.push_back(start);
 
-    // 'i' will be used to get all adjacent
-    // vertices of a vertex
+    // 자신 주변에 있는 간선을 담기 위한 이터레이터
     list<int>::iterator i;
 
     while(!queue.empty())
