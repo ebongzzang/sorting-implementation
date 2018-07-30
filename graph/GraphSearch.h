@@ -11,6 +11,11 @@
 class GraphSearch {
 public:
     static void bfs(Graph *graph, int start);
+    static void dfs(Graph *graph, int start);
+
+private:
+    static void dfsUtil(int v, bool visited[], list<int>* adj);
+
 };
 
 

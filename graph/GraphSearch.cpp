@@ -7,14 +7,18 @@
 #include <algorithm>
 
 
+
 /**
  * Tree에서의 level-order 탐색과 비슷하다.
+ * 시간 복잡도는 O(V + E)
  * @param graph
  * @param start
  */
+
 void GraphSearch::bfs(Graph *graph, int start) {
 
     int V = graph->V;
+    // 주변 버텍스
     list<int> *adj = graph->adj;
 
     bool *visited = new bool[V];
@@ -36,7 +40,7 @@ void GraphSearch::bfs(Graph *graph, int start) {
     {
         // 현재 노드는 제외
         start = queue.front();
-        cout << start << " ";
+        cout << start << "\t";
         queue.pop_front();
 
         // adj는 list로 저장되어 있므로 너비대로 접근
@@ -48,6 +52,44 @@ void GraphSearch::bfs(Graph *graph, int start) {
                 visited[*i] = true;
                 queue.push_back(*i);
             }
+        }
+    }
+    cout << std::endl;
+
+}
+
+/**
+ * Tree에서의 post-order 탐색과 비슷하다.
+ *
+ * 시간 복잡도는 O(V + E)
+ * @param graph
+ * @param start
+ */
+
+void GraphSearch::dfs(Graph *graph, int start) {
+    int V = graph->V;
+    list<int> * adj = graph->adj;
+
+    bool *visited = new bool[V];
+
+    for(int i = 0; i < V; i++)
+        visited[i] = false;
+
+
+    dfsUtil(start, visited, adj);
+
+}
+
+void GraphSearch::dfsUtil(int from, bool *visited, list<int> * adj) {
+    // 시작 노드부터 방문처리
+    visited[from] = true;
+    cout << from << "\t";
+
+    list<int>::iterator i;
+    // 재귀 호출하면 edge 부터 읽게됨
+    for(i = adj[from].begin(); i!= adj[from].end(); ++i) {
+        if (!visited[*i]) {
+            dfsUtil(*i, visited, adj);
         }
     }
 

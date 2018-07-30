@@ -42,7 +42,24 @@ void minHeap() {
 
 }
 
-void bfs() {
+void bfs(Graph &g) {
+
+    cout << "Following is Breadth First Traversal "
+         << "(starting from vertex 2) \n";
+
+    GraphSearch::bfs(&g, 2);
+
+}
+
+void dfs(Graph &g) {
+
+
+    cout << "Following is Depth First Traversal "
+         << "(starting from vertex 2) \n";
+
+    GraphSearch::dfs(&g, 2);
+}
+int main(void) {
     Graph g(4);
 
     g.addEdge(0, 1);
@@ -53,20 +70,8 @@ void bfs() {
     g.addEdge(2, 3);
     g.addEdge(3, 3);
 
-    cout << "Following is Breadth First Traversal "
-         << "(starting from vertex 2) \n";
-
-    GraphSearch::bfs(&g, 2);
-
-
-
-}
-int main(void) {
-    int data[10] = {1, 2, 5, 4, 3, 6, 9, 8, 7, 0};
-    rbTree(data);
-
-    minHeap();
-    bfs();
+    bfs(g);
+    dfs(g);
 
     return 0;
 
