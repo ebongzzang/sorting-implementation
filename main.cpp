@@ -59,6 +59,11 @@ void dfs(Graph &g) {
 
     GraphSearch::dfs(&g, 2);
 }
+
+void isCyclitic(Graph &g) {
+
+    GraphSearch::isCyclic(&g);
+}
 int main(void) {
     Graph g(4);
 
@@ -72,6 +77,8 @@ int main(void) {
 
     bfs(g);
     dfs(g);
+    std::cout << "\n";
+    isCyclitic(g);
 
     return 0;
 
