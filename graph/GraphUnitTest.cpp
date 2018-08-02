@@ -1,9 +1,19 @@
 //
-// Created by sangbong on 7/30/18.
+// Created by sangbong on 8/2/18.
 //
 
-#include "GraphUnitTest.h"
-
-#define CATCH_CONFIG_MAIN
-
 #include "../lib/catch.hpp"
+
+SCENARIO("") {
+    GIVEN("") {
+
+    }
+
+    WHEN("") {
+
+    }
+
+    THEN("") {
+
+    }
+}
