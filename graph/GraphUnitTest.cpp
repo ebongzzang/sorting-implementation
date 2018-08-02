@@ -2,9 +2,10 @@
 // Created by sangbong on 8/2/18.
 //
 
+
 #include "../lib/catch.hpp"
 
-SCENARIO("") {
+SCENARIO("hello catch") {
     GIVEN("") {
 
     }
@@ -14,6 +15,6 @@ SCENARIO("") {
     }
 
     THEN("") {
-
+        REQUIRE(true);
     }
 }

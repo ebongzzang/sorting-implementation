@@ -4,9 +4,13 @@ project(sorting-implementation)
 set(CMAKE_CXX_STANDARD 14)
 
 
-set(SOURCE_FILES main.cpp main.h tree/RbTree.cpp tree/RbTree.h sorting/MergeSort.cpp sorting/MergeSort.h tree/Heap.h tree/Heap.cpp
-        sorting/BasicSort.cpp sorting/BasicSort.h sorting/BasicSort.cpp sorting/BasicSort.h sorting/Quicksort.cpp sorting/Quicksort.h
-        graph/GraphSearch.cpp graph/GraphSearch.h graph/Graph.cpp graph/Graph.h graph/GraphTestRunner.cpp lib/catch.hpp graph/GraphUnitTest.cpp)
+set(GRAPH graph/GraphSearch.cpp graph/GraphSearch.h graph/Graph.cpp graph/Graph.h)
 
+set(SOURCE_FILES tree/RbTree.cpp tree/RbTree.h sorting/MergeSort.cpp sorting/MergeSort.h tree/Heap.h tree/Heap.cpp
+        sorting/BasicSort.cpp sorting/BasicSort.h sorting/Quicksort.cpp sorting/Quicksort.h)
 
-add_executable(sorting-implementation ${SOURCE_FILES} main.cpp main.h graph/GraphTestRunner.cpp)
+add_executable(sorting-implementation ${SOURCE_FILES} ${GRAPH} main.cpp main.h)
+
+add_library(CatchMain OBJECT lib/catch.hpp)
+
+add_executable(graphTest ${GRAPH} graph/GraphTestRunner.cpp graph/GraphUnitTest.cpp lib/catch.hpp)
