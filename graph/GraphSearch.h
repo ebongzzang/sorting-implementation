@@ -9,6 +9,7 @@
 #include "Graph.h"
 
 class GraphSearch {
+
 public:
     static void bfs(Graph *graph, int start);
     static void dfs(Graph *graph, int start);

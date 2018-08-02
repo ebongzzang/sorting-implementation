@@ -5,7 +5,13 @@
 
 #include "../lib/catch.hpp"
 
-SCENARIO("hello catch") {
+TEST_CASE("Disjoint Set feature test") {
+    SECTION("");
+
+}
+
+SCENARIO() {
+
     GIVEN("") {
 
     }

@@ -4,6 +4,7 @@
 #include "sorting/Quicksort.h"
 #include "graph/Graph.h"
 #include "graph/GraphSearch.h"
+#include "graph/undirectional/UndirectedGraph.h"
 
 using namespace std;
 
@@ -64,6 +65,25 @@ void isCyclitic(Graph &g) {
 
     GraphSearch::isCyclic(&g);
 }
+
+void isCyclitic(UndirectedGraph *graph) {
+
+    // add edge 0-1
+    graph->edges[0].src = 0;
+    graph->edges[0].dest = 1;
+
+    // add edge 1-2
+    graph->edges[1].src = 1;
+    graph->edges[1].dest = 2;
+
+    // add edge 0-2
+    graph->edges[2].src = 0;
+    graph->edges[2].dest = 2;
+
+    std::cout << graph->isCycle();
+}
+
+
 int main(void) {
     Graph g(4);
 
@@ -79,6 +99,8 @@ int main(void) {
     dfs(g);
     std::cout << "\n";
     isCyclitic(g);
+
+    isCyclitic(new UndirectedGraph(3,3));
 
     return 0;
 
