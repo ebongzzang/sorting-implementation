@@ -118,7 +118,7 @@ bool GraphSearch::isCyclic(Graph *graph) {
     return false;
 }
 
-/**
+/** directed graph
  * @param v 방문할 vertex
  * @param visited 방문한 vertex를 나타내는 리스트
  * @param recStack 트래킹에 사용하는 스택
