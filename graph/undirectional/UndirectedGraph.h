@@ -8,6 +8,14 @@
 struct Edge {
     int src;
     int dest;
+    int weight = 0;
+
+};
+
+struct subset
+{
+    int parent;
+    int rank;
 };
 
 class UndirectedGraph {
@@ -17,6 +25,7 @@ public:
     UndirectedGraph(int _vertex, int _edge);
     bool isCycle();
     Edge *edges;
+    UndirectedGraph();
 
 private:
     int vertex;

@@ -6,6 +6,7 @@
 #include <iostream>
 #include <cstring>
 
+
 UndirectedGraph::UndirectedGraph(int _vertex, int _edge) {
 
     this->vertex = _vertex;
