@@ -8,7 +8,7 @@
 struct Edge {
     int src;
     int dest;
-    int weight = 0;
+    int weight;
 
 };
 
@@ -25,11 +25,10 @@ public:
     UndirectedGraph(int _vertex, int _edge);
     bool isCycle();
     Edge *edges;
-    UndirectedGraph();
-
-private:
     int vertex;
     int edge;
+
+private:
 
     int find(int parent[], int i);
 

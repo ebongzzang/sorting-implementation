@@ -5,6 +5,7 @@
 #include "graph/Graph.h"
 #include "graph/GraphSearch.h"
 #include "graph/undirectional/UndirectedGraph.h"
+#include "graph/undirectional/KruskalsMst.h"
 
 using namespace std;
 
@@ -83,6 +84,34 @@ void isCyclitic(UndirectedGraph *graph) {
     std::cout << graph->isCycle();
 }
 
+void buildMst(UndirectedGraph *graph) {
+    // add edge 0-1
+    graph->edges[0].src = 0;
+    graph->edges[0].dest = 1;
+    graph->edges[0].weight = 10;
+
+    // add edges 0-2
+    graph->edges[1].src = 0;
+    graph->edges[1].dest = 2;
+    graph->edges[1].weight = 6;
+
+    // add edges 0-3
+    graph->edges[2].src = 0;
+    graph->edges[2].dest = 3;
+    graph->edges[2].weight = 5;
+
+    // add edges 1-3
+    graph->edges[3].src = 1;
+    graph->edges[3].dest = 3;
+    graph->edges[3].weight = 15;
+
+    // add edges 2-3
+    graph->edges[4].src = 2;
+    graph->edges[4].dest = 3;
+    graph->edges[4].weight = 4;
+
+    KruskalsMst::buildMst(graph);
+}
 
 int main(void) {
     Graph g(4);
@@ -101,6 +130,8 @@ int main(void) {
     isCyclitic(g);
 
     isCyclitic(new UndirectedGraph(3,3));
+
+    buildMst(new UndirectedGraph(4, 5));
 
     return 0;
 
